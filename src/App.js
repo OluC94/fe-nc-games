@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Header from "./components/Header";
+import NavBar from "./components/NavBar";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Reviews from "./pages/Reviews";
+import { useState } from "react";
 
 function App() {
+  const [username, setUser] = useState("mallionaire");
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header username={username} />
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/reviews" element={<Reviews />} />
+      </Routes>
     </div>
   );
 }
