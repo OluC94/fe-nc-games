@@ -54,6 +54,22 @@
   padding: 15px;
 }
 
+.review-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  gap: 12px;
+  margin: auto;
+  width: calc(90% + 12px);
+}
+
+.review-card {
+  border: 1px solid black;
+  border-color: black;
+}
+
 .review-img {
   display: block;
   margin: 0 auto;
@@ -66,5 +82,12 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 600px) {
+  .review-list {
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 }
