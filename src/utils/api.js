@@ -9,3 +9,9 @@ export const fetchReviews = () => {
     return data;
   });
 };
+
+export const fetchCategories = () => {
+  return gamesAPI.get("/categories").then(({ data }) => {
+    return data;
+  });
+};

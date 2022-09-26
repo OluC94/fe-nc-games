@@ -1,9 +1,10 @@
 import ReviewCard from "../components/ReviewCard";
 import { useEffect, useState } from "react";
 import { fetchReviews } from "../utils/api";
+import Loading from "../components/Loading";
 
 const Reviews = () => {
-  const [reviewList, setReviewList] = useState({});
+  const [reviewList, setReviewList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -14,10 +15,10 @@ const Reviews = () => {
     });
   }, []);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loading />;
   return (
     <section className="main-page">
-      <h2>Reviews</h2>
+      <h2 className="page-heading">Reviews</h2>
       <ul className="review-list">
         {reviewList.map((reviewItem) => {
           return (
