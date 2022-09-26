@@ -32,7 +32,6 @@
   background-color: lightgray;
   position: relative;
   padding: 5px;
-  height: 100vh;
 }
 
 .header {
@@ -53,6 +52,12 @@
 }
 .nav-item {
   padding: 15px;
+}
+
+.review-img {
+  display: block;
+  margin: 0 auto;
+  max-width: 50vw;
 }
 
 @keyframes App-logo-spin {
