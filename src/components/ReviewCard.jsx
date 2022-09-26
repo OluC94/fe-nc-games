@@ -1,6 +1,6 @@
 const ReviewCard = ({ review }) => {
   return (
-    <section className="review-card">
+    <section className="main-card">
       <h3>{review.title}</h3>
       <p>Category: {review.category}</p>
       <p>Author: {review.owner}</p>
