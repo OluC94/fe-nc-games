@@ -26,7 +26,7 @@ const Categories = ({ setCategoryName }) => {
           return (
             <li key={categoryItem.slug} className="main-card">
               <CategoryCard category={categoryItem} />
-              <Link to={`/reviews?category=${categoryItem.slug}`}>
+              <Link to={`/reviews/${categoryItem.slug}`}>
                 <button onClick={() => setCategoryName(categoryItem.slug)}>
                   See all reviews for {categoryItem.slug} games
                 </button>

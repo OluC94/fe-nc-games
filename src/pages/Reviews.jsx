@@ -2,14 +2,17 @@ import ReviewCard from "../components/ReviewCard";
 import { useEffect, useState } from "react";
 import { fetchReviews } from "../utils/api";
 import Loading from "../components/Loading";
+import { useParams } from "react-router-dom";
 
-const Reviews = ({ categoryName }) => {
+const Reviews = () => {
   const [reviewList, setReviewList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const { category } = useParams();
+
   useEffect(() => {
     setIsLoading(true);
-    fetchReviews(categoryName).then(({ reviews }) => {
+    fetchReviews(category).then(({ reviews }) => {
       setReviewList(reviews);
       setIsLoading(false);
     });
