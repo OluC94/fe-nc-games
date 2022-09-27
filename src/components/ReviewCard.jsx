@@ -13,9 +13,6 @@ const ReviewCard = ({ review }) => {
       />
       <br></br>
       <p>
-        {review.votes === 1 ? review.votes + " vote" : review.votes + " votes"}{" "}
-      </p>
-      <p>
         {review.comment_count === 1
           ? review.comment_count + " comment"
           : review.comment_count + " comments"}

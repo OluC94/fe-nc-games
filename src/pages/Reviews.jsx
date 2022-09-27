@@ -28,9 +28,12 @@ const Reviews = () => {
           return (
             <li key={reviewItem.review_id} className="main-card">
               <ReviewCard review={reviewItem} />
-              <Link
-                to={`/reviews/${reviewItem.category}/${reviewItem.review_id}`}
-              >
+              <p>
+                {reviewItem.votes === 1
+                  ? reviewItem.votes + " vote"
+                  : reviewItem.votes + " votes"}
+              </p>
+              <Link to={`/reviews/article/${reviewItem.review_id}`}>
                 <button>Read more</button>
               </Link>
             </li>

@@ -25,10 +25,7 @@ function App() {
           element={<Categories setCategoryName={setCategoryName} />}
         />
         <Route path="/reviews/:category" element={<Reviews />} />
-        <Route
-          path="/reviews/:category/:review_id"
-          element={<SingleReview />}
-        />
+        <Route path="/reviews/article/:review_id" element={<SingleReview />} />
       </Routes>
     </div>
   );
