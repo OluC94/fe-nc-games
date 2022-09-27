@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import CommentCard from "../components/CommentCard";
 import ErrorPage from "../components/ErrorPage";
 import Loading from "../components/Loading";
 import ReviewCard from "../components/ReviewCard";
@@ -53,6 +54,7 @@ const SingleReview = () => {
       <button onClick={() => handleVote(displayReview)}>Vote!</button>
       <p>{displayReview.review_body}</p>
       <p>{dateFormat(displayReview.created_at)}</p>
+      <CommentCard review={displayReview} />
     </section>
   );
 };

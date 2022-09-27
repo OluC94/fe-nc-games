@@ -68,6 +68,23 @@
   margin: auto;
   width: calc(90% + 12px);
 }
+.comment-list {
+  list-style: none;
+  display: inline-flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  gap: 12px;
+  margin: auto;
+  border: 1px solid black;
+  width: calc(90% + 12px);
+  padding: 0.5rem;
+}
+.comment-card {
+  border: 1px solid black;
+  border-color: black;
+  padding: 0.2rem;
+}
 
 .main-card {
   border: 1px solid black;
