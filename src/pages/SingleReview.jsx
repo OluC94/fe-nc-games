@@ -21,7 +21,6 @@ const SingleReview = () => {
       })
       .catch((err) => {
         setError(err);
-        console.log(err);
         setIsLoading(false);
       });
   }, [review_id]);
