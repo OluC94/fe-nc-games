@@ -17,7 +17,7 @@ const Reviews = () => {
       setReviewList(reviews);
       setIsLoading(false);
     });
-  }, []);
+  }, [category]);
 
   if (isLoading) return <Loading />;
   return (
