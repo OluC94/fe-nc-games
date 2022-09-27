@@ -26,6 +26,12 @@ export const fetchSingleReview = (review_id) => {
   });
 };
 
+export const incVotes = (review_id, data) => {
+  return gamesAPI.patch(`/reviews/${review_id}`, data).then(({ data }) => {
+    return data;
+  });
+};
+
 export const fetchCategories = () => {
   return gamesAPI.get("/categories").then(({ data }) => {
     return data;
