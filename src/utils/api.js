@@ -1,5 +1,15 @@
 import axios from "axios";
 
+export const capitalise = (str) => {
+  return str[0].toUpperCase() + str.slice(1);
+};
+
+export const dateFormat = (date) => {
+  const dateArray = date.split("T");
+  const timeArray = dateArray[1].split("Z");
+  return `Added on ${dateArray[0]} at ${timeArray[0].slice(0, 5)}`;
+};
+
 const gamesAPI = axios.create({
   baseURL: "https://nc-games-oluc94.herokuapp.com/api",
 });
@@ -10,12 +20,14 @@ export const fetchReviews = (category) => {
   });
 };
 
-export const fetchCategories = () => {
-  return gamesAPI.get("/categories").then(({ data }) => {
+export const fetchSingleReview = (review_id) => {
+  return gamesAPI.get(`/reviews/${review_id}`).then(({ data }) => {
     return data;
   });
 };
 
-export const capitalise = (str) => {
-  return str[0].toUpperCase() + str.slice(1);
+export const fetchCategories = () => {
+  return gamesAPI.get("/categories").then(({ data }) => {
+    return data;
+  });
 };

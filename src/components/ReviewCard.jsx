@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
+
 const ReviewCard = ({ review }) => {
   return (
-    <section className="main-card">
+    <section>
       <h3>{review.title}</h3>
       <p>Category: {review.category}</p>
       <p>Author: {review.owner}</p>
@@ -10,7 +12,6 @@ const ReviewCard = ({ review }) => {
         className="review-img"
       />
       <br></br>
-      <button>Read more</button>
       <p>
         {review.votes === 1 ? review.votes + " vote" : review.votes + " votes"}{" "}
       </p>
