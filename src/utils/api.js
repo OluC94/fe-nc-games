@@ -32,6 +32,12 @@ export const incVotes = (review_id, data) => {
   });
 };
 
+export const fetchReviewComments = (review_id) => {
+  return gamesAPI.get(`/reviews/${review_id}/comments`).then(({ data }) => {
+    return data;
+  });
+};
+
 export const fetchCategories = () => {
   return gamesAPI.get("/categories").then(({ data }) => {
     return data;
