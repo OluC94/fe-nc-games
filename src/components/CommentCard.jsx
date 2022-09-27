@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { dateFormat, fetchReviewComments } from "../utils/api";
 import Loading from "./Loading";
 import ErrorPage from "./ErrorPage";
+import NewComment from "./NewComment";
 
 const CommentCard = ({ review }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -27,6 +28,8 @@ const CommentCard = ({ review }) => {
 
   return (
     <section>
+      <NewComment />
+      <br />
       {comments.length === 0 ? (
         "No comments yet"
       ) : (
