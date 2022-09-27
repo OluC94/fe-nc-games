@@ -54,7 +54,11 @@
   padding: 15px;
 }
 
-.review-list {
+.page-heading {
+  align-items: center;
+}
+
+.main-list {
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -65,7 +69,13 @@
   width: calc(90% + 12px);
 }
 
-.review-card {
+.main-card {
+  border: 1px solid black;
+  border-color: black;
+  padding: 0.5rem;
+}
+
+.category-card {
   border: 1px solid black;
   border-color: black;
 }

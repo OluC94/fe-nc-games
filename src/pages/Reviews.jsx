@@ -1,24 +1,28 @@
 import ReviewCard from "../components/ReviewCard";
 import { useEffect, useState } from "react";
 import { fetchReviews } from "../utils/api";
+import Loading from "../components/Loading";
+import { useParams } from "react-router-dom";
 
 const Reviews = () => {
-  const [reviewList, setReviewList] = useState({});
+  const [reviewList, setReviewList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const { category } = useParams();
 
   useEffect(() => {
     setIsLoading(true);
-    fetchReviews().then(({ reviews }) => {
+    fetchReviews(category).then(({ reviews }) => {
       setReviewList(reviews);
       setIsLoading(false);
     });
   }, []);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loading />;
   return (
     <section className="main-page">
-      <h2>Reviews</h2>
-      <ul className="review-list">
+      <h2 className="page-heading">Reviews</h2>
+      <ul className="main-list">
         {reviewList.map((reviewItem) => {
           return (
             <li key={reviewItem.review_id}>
