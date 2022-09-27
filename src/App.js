@@ -7,6 +7,7 @@ import Reviews from "./pages/Reviews";
 import { useState } from "react";
 import Categories from "./pages/Categories";
 import { useParams } from "react-router-dom";
+import SingleReview from "./pages/SingleReview";
 
 function App() {
   const [username, setUser] = useState("mallionaire");
@@ -23,7 +24,11 @@ function App() {
           path="/categories"
           element={<Categories setCategoryName={setCategoryName} />}
         />
-        <Route path={`/reviews/:category`} element={<Reviews />} />
+        <Route path="/reviews/:category" element={<Reviews />} />
+        <Route
+          path="/reviews/:category/:review_id"
+          element={<SingleReview />}
+        />
       </Routes>
     </div>
   );
