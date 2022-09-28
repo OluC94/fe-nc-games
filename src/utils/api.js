@@ -38,6 +38,15 @@ export const fetchReviewComments = (review_id) => {
   });
 };
 
+export const addReviewComment = (review_id, data) => {
+  console.log(review_id, data);
+  return gamesAPI
+    .post(`/reviews/${review_id}/comments`, data)
+    .then(({ data }) => {
+      return data;
+    });
+};
+
 export const fetchCategories = () => {
   return gamesAPI.get("/categories").then(({ data }) => {
     return data;

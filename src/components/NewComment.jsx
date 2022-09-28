@@ -1,18 +1,44 @@
 import { useState } from "react";
+import { addReviewComment } from "../utils/api";
+import Loading from "./Loading";
 
-const NewComment = () => {
-  const [newComment, setNewComment] = useState("");
-  const [commentInput, setCommentInput] = useState("");
+const NewComment = ({
+  review,
+  username,
+  setCommentSubmitted,
+  setCommCount,
+}) => {
+  const [inputComment, setInputComment] = useState("");
+  const [newComment, setNewComment] = useState({});
+  const [commentFailed, setCommentFailed] = useState(false);
+  const [noCommentAdded, setNoCommentAdded] = useState(false);
+
+  const { review_id } = review;
 
   const handleCommentInput = (e) => {
-    setCommentInput(e.target.value);
+    setInputComment(e.target.value);
   };
 
   const handleSubmitComment = (e) => {
+    setCommentFailed(false);
+    setCommentSubmitted(false);
     e.preventDefault();
-    setNewComment(commentInput);
-    console.log(newComment);
-    //creat util that adds the comment
+    const reqObj = { username: username, body: inputComment };
+    if (inputComment.length > 0) {
+      setNoCommentAdded(false);
+      addReviewComment(review_id, reqObj)
+        .then(({ comment }) => {
+          setNewComment(comment);
+          setInputComment("");
+          setCommentSubmitted(true);
+          setCommCount((currCommCount) => currCommCount + 1);
+        })
+        .catch((err) => {
+          setCommentFailed(true);
+        });
+    } else {
+      setNoCommentAdded(true);
+    }
   };
 
   return (
@@ -25,12 +51,14 @@ const NewComment = () => {
           id="new-comment"
           name="newComment"
           placeholder="Add your comment..."
-          value={commentInput}
+          value={inputComment}
           onChange={handleCommentInput}
           required
         ></textarea>
         <br />
         <button onClick={handleSubmitComment}>Submit Comment</button>
+        {commentFailed ? <span>Your comment failed to post</span> : null}
+        {noCommentAdded ? <p>Cannot submit empty comment</p> : null}
       </form>
     </section>
   );

@@ -4,10 +4,11 @@ import Loading from "./Loading";
 import ErrorPage from "./ErrorPage";
 import NewComment from "./NewComment";
 
-const CommentCard = ({ review }) => {
+const CommentCard = ({ review, username, setCommCount }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [comments, setComments] = useState([]);
   const [error, setError] = useState(null);
+  const [commentSubmitted, setCommentSubmitted] = useState(false);
 
   const { review_id } = review;
   useEffect(() => {
@@ -21,14 +22,20 @@ const CommentCard = ({ review }) => {
         setError(err);
         setIsLoading(false);
       });
-  }, []);
+  }, [commentSubmitted]);
 
   if (isLoading) return <Loading />;
   if (error) return <ErrorPage />;
 
   return (
     <section>
-      <NewComment />
+      {commentSubmitted ? <span>Your comment has been added</span> : null}
+      <NewComment
+        review={review}
+        username={username}
+        setCommentSubmitted={setCommentSubmitted}
+        setCommCount={setCommCount}
+      />
       <br />
       {comments.length === 0 ? (
         "No comments yet"
