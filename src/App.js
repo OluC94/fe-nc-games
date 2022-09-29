@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom";
 import SingleReview from "./pages/SingleReview";
 
 function App() {
-  const [username, setUser] = useState("mallionaire");
+  const [username, setUser] = useState("grumpy19");
   const [categoryName, setCategoryName] = useState("");
 
   return (
@@ -25,7 +25,10 @@ function App() {
           element={<Categories setCategoryName={setCategoryName} />}
         />
         <Route path="/reviews/:category" element={<Reviews />} />
-        <Route path="/reviews/article/:review_id" element={<SingleReview />} />
+        <Route
+          path="/reviews/article/:review_id"
+          element={<SingleReview username={username} />}
+        />
       </Routes>
     </div>
   );

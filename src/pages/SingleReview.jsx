@@ -6,12 +6,13 @@ import Loading from "../components/Loading";
 import ReviewCard from "../components/ReviewCard";
 import { dateFormat, fetchSingleReview, incVotes } from "../utils/api";
 
-const SingleReview = () => {
+const SingleReview = ({ username }) => {
   const { category, review_id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [displayReview, setDisplayReview] = useState({});
   const [error, setError] = useState(null);
   const [votes, setVotes] = useState(0);
+  const [commCount, setCommCount] = useState(0);
   const [hasVoted, setHasVoted] = useState(false);
 
   useEffect(() => {
@@ -21,6 +22,7 @@ const SingleReview = () => {
       .then(({ review }) => {
         setDisplayReview(review);
         setVotes(review.votes);
+        setCommCount(review.comment_count);
         setIsLoading(false);
       })
       .catch((err) => {
@@ -50,11 +52,18 @@ const SingleReview = () => {
   return (
     <section className="main-page">
       <ReviewCard review={displayReview} />
+      <p>
+        {commCount === 1 ? commCount + " comment" : commCount + " comments"}
+      </p>
       <p>{votes === 1 ? votes + " vote" : votes + " votes"} </p>
       <button onClick={() => handleVote(displayReview)}>Vote!</button>
       <p>{displayReview.review_body}</p>
       <p>{dateFormat(displayReview.created_at)}</p>
-      <CommentCard review={displayReview} />
+      <CommentCard
+        review={displayReview}
+        username={username}
+        setCommCount={setCommCount}
+      />
     </section>
   );
 };

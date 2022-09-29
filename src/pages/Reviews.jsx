@@ -29,6 +29,11 @@ const Reviews = () => {
             <li key={reviewItem.review_id} className="main-card">
               <ReviewCard review={reviewItem} />
               <p>
+                {reviewItem.comment_count === 1
+                  ? reviewItem.comment_count + " comment"
+                  : reviewItem.comment_count + " comments"}
+              </p>
+              <p>
                 {reviewItem.votes === 1
                   ? reviewItem.votes + " vote"
                   : reviewItem.votes + " votes"}

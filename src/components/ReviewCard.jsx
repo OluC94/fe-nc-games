@@ -12,11 +12,6 @@ const ReviewCard = ({ review }) => {
         className="review-img"
       />
       <br></br>
-      <p>
-        {review.comment_count === 1
-          ? review.comment_count + " comment"
-          : review.comment_count + " comments"}
-      </p>
     </section>
   );
 };

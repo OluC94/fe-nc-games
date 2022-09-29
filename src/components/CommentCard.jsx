@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { dateFormat, fetchReviewComments } from "../utils/api";
 import Loading from "./Loading";
 import ErrorPage from "./ErrorPage";
+import NewComment from "./NewComment";
 
-const CommentCard = ({ review }) => {
+const CommentCard = ({ review, username, setCommCount }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [comments, setComments] = useState([]);
   const [error, setError] = useState(null);
+  const [commentSubmitted, setCommentSubmitted] = useState(false); // comment this out
 
   const { review_id } = review;
   useEffect(() => {
@@ -27,6 +29,16 @@ const CommentCard = ({ review }) => {
 
   return (
     <section>
+      {commentSubmitted ? <span>Your comment has been added</span> : null}
+      <NewComment
+        review={review}
+        username={username}
+        setCommentSubmitted={setCommentSubmitted}
+        setCommCount={setCommCount}
+        comments={comments}
+        setComments={setComments}
+      />
+      <br />
       {comments.length === 0 ? (
         "No comments yet"
       ) : (

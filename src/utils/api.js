@@ -5,6 +5,8 @@ export const capitalise = (str) => {
 };
 
 export const dateFormat = (date) => {
+  if (date === "Just added") return date;
+
   const dateArray = date.split("T");
   const timeArray = dateArray[1].split("Z");
   return `Added on ${dateArray[0]} at ${timeArray[0].slice(0, 5)}`;
@@ -36,6 +38,14 @@ export const fetchReviewComments = (review_id) => {
   return gamesAPI.get(`/reviews/${review_id}/comments`).then(({ data }) => {
     return data;
   });
+};
+
+export const addReviewComment = (review_id, data) => {
+  return gamesAPI
+    .post(`/reviews/${review_id}/comments`, data)
+    .then(({ data }) => {
+      return data;
+    });
 };
 
 export const fetchCategories = () => {

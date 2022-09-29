@@ -103,6 +103,15 @@
   max-width: 50vw;
 }
 
+#new-comment {
+  width: 50vw;
+  height: 25vh;
+}
+
+.comment-form {
+  display: inline;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
