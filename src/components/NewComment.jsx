@@ -39,12 +39,13 @@ const NewComment = ({
           comment_id: comments.length,
         },
       ]);
+      setCommCount((currCommCount) => currCommCount + 1);
+
       addReviewComment(review_id, reqObj)
         .then(({ comment }) => {
           setNewComment(comment);
           setInputComment("");
           setCommentSubmitted(true);
-          setCommCount((currCommCount) => currCommCount + 1);
         })
         .catch((err) => {
           setCommentFailed(true);
