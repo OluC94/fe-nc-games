@@ -7,6 +7,8 @@ const NewComment = ({
   username,
   setCommentSubmitted,
   setCommCount,
+  comments,
+  setComments,
 }) => {
   const [inputComment, setInputComment] = useState("");
   const [newComment, setNewComment] = useState({});
@@ -24,8 +26,19 @@ const NewComment = ({
     setCommentSubmitted(false);
     e.preventDefault();
     const reqObj = { username: username, body: inputComment };
+
     if (inputComment.length > 0) {
       setNoCommentAdded(false);
+
+      setComments((currComments) => [
+        ...comments,
+        {
+          body: inputComment,
+          created_at: "Just added",
+          votes: 0,
+          comment_id: comments.length,
+        },
+      ]);
       addReviewComment(review_id, reqObj)
         .then(({ comment }) => {
           setNewComment(comment);
@@ -35,6 +48,8 @@ const NewComment = ({
         })
         .catch((err) => {
           setCommentFailed(true);
+          setCommentSubmitted(true);
+          setCommCount((currCommCount) => currCommCount - 1);
         });
     } else {
       setNoCommentAdded(true);

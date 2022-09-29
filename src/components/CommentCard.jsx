@@ -8,7 +8,7 @@ const CommentCard = ({ review, username, setCommCount }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [comments, setComments] = useState([]);
   const [error, setError] = useState(null);
-  const [commentSubmitted, setCommentSubmitted] = useState(false);
+  const [commentSubmitted, setCommentSubmitted] = useState(false); // comment this out
 
   const { review_id } = review;
   useEffect(() => {
@@ -22,7 +22,7 @@ const CommentCard = ({ review, username, setCommCount }) => {
         setError(err);
         setIsLoading(false);
       });
-  }, [commentSubmitted]);
+  }, []);
 
   if (isLoading) return <Loading />;
   if (error) return <ErrorPage />;
@@ -35,6 +35,8 @@ const CommentCard = ({ review, username, setCommCount }) => {
         username={username}
         setCommentSubmitted={setCommentSubmitted}
         setCommCount={setCommCount}
+        comments={comments}
+        setComments={setComments}
       />
       <br />
       {comments.length === 0 ? (
