@@ -26,7 +26,7 @@ function App() {
         />
         <Route path="/reviews/:category" element={<Reviews />} />
         <Route
-          path="/reviews/article/:review_id"
+          path="/reviews/review/:review_id"
           element={<SingleReview username={username} />}
         />
       </Routes>

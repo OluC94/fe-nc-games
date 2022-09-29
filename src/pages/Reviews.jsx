@@ -4,30 +4,103 @@ import { fetchReviews } from "../utils/api";
 import Loading from "../components/Loading";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { dateFormat } from "../utils/api";
+import { useSearchParams } from "react-router-dom";
 
 const Reviews = () => {
   const [reviewList, setReviewList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
   const { category } = useParams();
+  const [params, setParams] = useState({});
+  const [searchParams, setSearchParams] = useSearchParams({});
+  const queryOutput = {
+    created_at: "date",
+    comment_count: "comment count",
+    votes: "votes",
+    asc: "ascending",
+    desc: "descending",
+  };
 
   useEffect(() => {
     setIsLoading(true);
-    fetchReviews(category).then(({ reviews }) => {
+    fetchReviews(params).then(({ reviews }) => {
       setReviewList(reviews);
       setIsLoading(false);
     });
+  }, [params]);
+
+  useEffect(() => {
+    setParams({ category });
   }, [category]);
+
+  const handleSortBy = (e) => {
+    setSearchParams({ sort_by: e.target.value });
+
+    setParams((currParams) => {
+      return { sort_by: e.target.value };
+    });
+  };
+
+  const handleOrder = (e) => {
+    setSearchParams((currSearchParams) => {
+      if (params.sort_by === undefined)
+        return { sort_by: "created_at", order: e.target.value };
+      return { sort_by: params.sort_by, order: e.target.value };
+    });
+    setParams((currParams) => {
+      return { ...currParams, order: e.target.value };
+    });
+  };
 
   if (isLoading) return <Loading />;
   return (
     <section className="main-page">
+      <section>
+        <label htmlFor="sort-by">Sort By:</label>
+        <select
+          name="sortBy"
+          className="dropdown"
+          id="sort-by"
+          onChange={handleSortBy}
+        >
+          <option>...</option>
+          <option value="created_at">Date</option>
+          <option value="comment_count">Comments</option>
+          <option value="votes">Votes</option>
+        </select>
+        {params.sort_by === undefined ? (
+          <span>Currently sorted by date</span>
+        ) : (
+          <span>Current sorted by {queryOutput[params.sort_by]}</span>
+        )}
+
+        <br />
+        <label htmlFor="order">Order By:</label>
+        <select
+          name="order"
+          className="dropdown"
+          id="order"
+          onChange={handleOrder}
+        >
+          <option>...</option>
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+        {!params.order ? (
+          <span>Current order: descending</span>
+        ) : (
+          <span>Current order: {queryOutput[params.order]}</span>
+        )}
+        <br />
+      </section>
+
       <h2 className="page-heading">Reviews</h2>
       <ul className="main-list">
         {reviewList.map((reviewItem) => {
           return (
             <li key={reviewItem.review_id} className="main-card">
               <ReviewCard review={reviewItem} />
+              <p>{dateFormat(reviewItem.created_at)}</p>
               <p>
                 {reviewItem.comment_count === 1
                   ? reviewItem.comment_count + " comment"
@@ -38,7 +111,7 @@ const Reviews = () => {
                   ? reviewItem.votes + " vote"
                   : reviewItem.votes + " votes"}
               </p>
-              <Link to={`/reviews/article/${reviewItem.review_id}`}>
+              <Link to={`/reviews/review/${reviewItem.review_id}`}>
                 <button>Read more</button>
               </Link>
             </li>
