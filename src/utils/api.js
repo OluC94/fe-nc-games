@@ -48,6 +48,12 @@ export const addReviewComment = (review_id, data) => {
     });
 };
 
+export const deleteCommentByCommentID = (comment_id) => {
+  return gamesAPI.delete(`/comments/${comment_id}`).then(({ data }) => {
+    return data;
+  });
+};
+
 export const fetchCategories = () => {
   return gamesAPI.get("/categories").then(({ data }) => {
     return data;

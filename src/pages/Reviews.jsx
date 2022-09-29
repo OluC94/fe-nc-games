@@ -55,6 +55,7 @@ const Reviews = () => {
   if (isLoading) return <Loading />;
   return (
     <section className="main-page">
+      <h2 className="page-heading">Reviews</h2>
       <section>
         <label htmlFor="sort-by">Sort By:</label>
         <select
@@ -93,8 +94,6 @@ const Reviews = () => {
         )}
         <br />
       </section>
-
-      <h2 className="page-heading">Reviews</h2>
       <ul className="main-list">
         {reviewList.map((reviewItem) => {
           return (
