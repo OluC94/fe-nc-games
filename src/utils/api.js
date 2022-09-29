@@ -17,7 +17,6 @@ const gamesAPI = axios.create({
 });
 
 export const fetchReviews = (params) => {
-  console.log(params);
   return gamesAPI.get("/reviews", { params }).then(({ data }) => {
     return data;
   });
