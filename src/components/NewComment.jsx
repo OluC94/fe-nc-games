@@ -36,7 +36,7 @@ const NewComment = ({
           body: inputComment,
           created_at: "Just added",
           votes: 0,
-          comment_id: comments.length,
+          comment_id: comments.length + 1,
         },
       ]);
       setCommCount((currCommCount) => currCommCount + 1);
@@ -51,6 +51,10 @@ const NewComment = ({
           setCommentFailed(true);
           setCommentSubmitted(true);
           setCommCount((currCommCount) => currCommCount - 1);
+
+          const errComments = [...comments];
+          errComments.pop();
+          setComments(errComments);
         });
     } else {
       setNoCommentAdded(true);
