@@ -16,8 +16,9 @@ const gamesAPI = axios.create({
   baseURL: "https://nc-games-oluc94.herokuapp.com/api",
 });
 
-export const fetchReviews = (category) => {
-  return gamesAPI.get("/reviews", { params: { category } }).then(({ data }) => {
+export const fetchReviews = (params) => {
+  console.log(params);
+  return gamesAPI.get("/reviews", { params }).then(({ data }) => {
     return data;
   });
 };

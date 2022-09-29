@@ -34,6 +34,7 @@ const NewComment = ({
         ...comments,
         {
           body: inputComment,
+          author: username,
           created_at: "Just added",
           votes: 0,
           comment_id: comments.length + 1,
