@@ -10,6 +10,7 @@ import { useSearchParams } from "react-router-dom";
 const Reviews = () => {
   const [reviewList, setReviewList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [badCategory, setBadCategory] = useState(false);
   const { category } = useParams();
   const [params, setParams] = useState({});
   const [searchParams, setSearchParams] = useSearchParams({});
@@ -23,10 +24,16 @@ const Reviews = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetchReviews(params).then(({ reviews }) => {
-      setReviewList(reviews);
-      setIsLoading(false);
-    });
+    setBadCategory(false);
+    fetchReviews(params)
+      .then(({ reviews }) => {
+        setReviewList(reviews);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setBadCategory(true);
+        setIsLoading(false);
+      });
   }, [params]);
 
   useEffect(() => {
@@ -56,6 +63,7 @@ const Reviews = () => {
   return (
     <section className="main-page">
       <h2 className="page-heading">Reviews</h2>
+      {badCategory ? <p>Category not found</p> : null}
       <section>
         <label htmlFor="sort-by">Sort By:</label>
         <select

@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 const ErrorPage = ({ error }) => {
   const { review_id } = useParams();
   const params = useParams();
-  console.log(params["*"]);
   let stsCode;
   if (error !== undefined) {
     stsCode = error.response.status;
