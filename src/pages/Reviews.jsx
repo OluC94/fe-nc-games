@@ -14,6 +14,9 @@ const Reviews = () => {
   const { category } = useParams();
   const [params, setParams] = useState({});
   const [searchParams, setSearchParams] = useSearchParams({});
+  const sort_by = searchParams.get("sort_by");
+  const order = searchParams.get("order");
+
   const queryOutput = {
     created_at: "date",
     comment_count: "comment count",
@@ -37,7 +40,7 @@ const Reviews = () => {
   }, [params]);
 
   useEffect(() => {
-    setParams({ category });
+    setParams({ category, sort_by: sort_by, order: order });
   }, [category]);
 
   const handleSortBy = (e) => {
@@ -77,10 +80,13 @@ const Reviews = () => {
           <option value="comment_count">Comments</option>
           <option value="votes">Votes</option>
         </select>
-        {params.sort_by === undefined ? (
-          <span>Currently sorted by date</span>
+        {params.sort_by === undefined || params.sort_by === null ? (
+          <span>Currently sorting: date</span>
         ) : (
-          <span>Current sorted by {queryOutput[params.sort_by]}</span>
+          <span>
+            Currently sorting:{" "}
+            {queryOutput[params.sort_by] || "criteria not recognised"}
+          </span>
         )}
 
         <br />
@@ -95,10 +101,12 @@ const Reviews = () => {
           <option value="asc">Ascending</option>
           <option value="desc">Descending</option>
         </select>
-        {!params.order ? (
+        {params.order === undefined || params.order === null ? (
           <span>Current order: descending</span>
         ) : (
-          <span>Current order: {queryOutput[params.order]}</span>
+          <span>
+            Current order: {queryOutput[params.order] || "order not recognised"}
+          </span>
         )}
         <br />
       </section>
