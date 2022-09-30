@@ -8,6 +8,7 @@ import { useState } from "react";
 import Categories from "./pages/Categories";
 import { useParams } from "react-router-dom";
 import SingleReview from "./pages/SingleReview";
+import ErrorPage from "./components/ErrorPage";
 
 function App() {
   const [username, setUser] = useState("grumpy19");
@@ -25,6 +26,7 @@ function App() {
           path="/reviews/review/:review_id"
           element={<SingleReview username={username} />}
         />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </div>
   );
