@@ -9,26 +9,26 @@ import Categories from "./pages/Categories";
 import { useParams } from "react-router-dom";
 import SingleReview from "./pages/SingleReview";
 import ErrorPage from "./components/ErrorPage";
+import { UserContext } from "./contexts/User";
 
 function App() {
   const [username, setUser] = useState("grumpy19");
 
   return (
-    <div className="App">
-      <Header username={username} />
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/reviews" element={<Reviews />} />
-        <Route path="/categories" element={<Categories />} />
-        <Route path="/reviews/:category" element={<Reviews />} />
-        <Route
-          path="/reviews/review/:review_id"
-          element={<SingleReview username={username} />}
-        />
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
-    </div>
+    <UserContext.Provider value={{ username, setUser }}>
+      <div className="App">
+        <Header />
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/reviews" element={<Reviews />} />
+          <Route path="/categories" element={<Categories />} />
+          <Route path="/reviews/:category" element={<Reviews />} />
+          <Route path="/reviews/review/:review_id" element={<SingleReview />} />
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+      </div>
+    </UserContext.Provider>
   );
 }
 
