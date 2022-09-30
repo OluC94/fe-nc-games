@@ -5,9 +5,12 @@ import ErrorPage from "../components/ErrorPage";
 import Loading from "../components/Loading";
 import ReviewCard from "../components/ReviewCard";
 import { dateFormat, fetchSingleReview, incVotes } from "../utils/api";
+import { useContext } from "react";
+import { UserContext } from "../contexts/User";
 
-const SingleReview = ({ username }) => {
+const SingleReview = () => {
   const { category, review_id } = useParams();
+  const { username, setUser } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(true);
   const [displayReview, setDisplayReview] = useState({});
   const [error, setError] = useState(null);
