@@ -12,7 +12,9 @@ const CommentCard = ({ review, username, setCommCount }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [comments, setComments] = useState([]);
   const [error, setError] = useState(null);
-  const [commentSubmitted, setCommentSubmitted] = useState(false); // comment this out
+  const [commentSubmitted, setCommentSubmitted] = useState(false);
+  const commentDeletedStr =
+    "Your comment has now been deleted, please refresh the page to see updates";
 
   const { review_id } = review;
   useEffect(() => {
@@ -29,29 +31,31 @@ const CommentCard = ({ review, username, setCommCount }) => {
   }, []);
 
   const handleDelete = (e) => {
-    //set comments to [comments with idx=comment_id removed]
-    // display comment deleted
-    // call the functino that deletes the comment
-
-    //notes for tomorrow
-    // 1 - check how the state was used for optimistic new comment rendering
-    // 2 -  decide on output message -> replace comment card in array or add msg above comment card
-
     const targetID = parseInt(e.target.value);
-    setComments((currComments) => {
-      console.log(
-        currComments.map((comm) => {
-          console.log(typeof comm.comment_id);
-          console.log(typeof targetID);
-          return comm;
-        })
-      );
-      return currComments;
-    });
 
-    // deleteCommentByCommentID(e.target.value).then((response) => {
-    //   console.log(response);
-    // });
+    setComments((currComments) => {
+      return currComments.map((comm) => {
+        if (comm.comment_id !== targetID) {
+          return comm;
+        } else {
+          return { ...comm, deleted: true };
+        }
+      });
+    });
+    setCommCount((currCommCount) => currCommCount - 1);
+
+    deleteCommentByCommentID(e.target.value).catch((err) => {
+      setCommCount((currCommCount) => currCommCount + 1);
+      setComments((currComments) => {
+        return currComments.map((comm) => {
+          if (comm.comment_id !== targetID) {
+            return comm;
+          } else {
+            return { ...comm, deleteFailed: true };
+          }
+        });
+      });
+    });
   };
 
   if (isLoading) return <Loading />;
@@ -86,11 +90,15 @@ const CommentCard = ({ review, username, setCommCount }) => {
                       : comment.votes + " votes"}
                   </p>
                   <p>{dateFormat(comment.created_at)}</p>
-                  {comment.author !== username ? null : (
+                  {comment.deleted ? <p> {commentDeletedStr} </p> : null}
+                  {comment.deleteFailed ? (
+                    <p> Oops, something went wrong </p>
+                  ) : null}
+                  {comment.author === username && !comment.deleted ? (
                     <button value={comment.comment_id} onClick={handleDelete}>
                       Delete Comment
                     </button>
-                  )}
+                  ) : null}
                 </li>
               );
             })}

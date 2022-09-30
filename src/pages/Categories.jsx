@@ -5,7 +5,7 @@ import Loading from "../components/Loading";
 import CategoryCard from "../components/CategoryCard";
 import { Link } from "react-router-dom";
 
-const Categories = ({ setCategoryName }) => {
+const Categories = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [categoryList, setCategoryList] = useState([]);
 
@@ -27,9 +27,7 @@ const Categories = ({ setCategoryName }) => {
             <li key={categoryItem.slug} className="main-card">
               <CategoryCard category={categoryItem} />
               <Link to={`/reviews/${categoryItem.slug}`}>
-                <button onClick={() => setCategoryName(categoryItem.slug)}>
-                  See all reviews for {categoryItem.slug} games
-                </button>
+                <button>See all reviews for {categoryItem.slug} games</button>
               </Link>
             </li>
           );

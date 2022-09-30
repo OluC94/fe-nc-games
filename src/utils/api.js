@@ -5,7 +5,7 @@ export const capitalise = (str) => {
 };
 
 export const dateFormat = (date) => {
-  if (date === "Just added") return date;
+  if (date === "Just added" || date === "Deleted") return date;
 
   const dateArray = date.split("T");
   const timeArray = dateArray[1].split("Z");
