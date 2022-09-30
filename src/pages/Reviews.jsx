@@ -14,8 +14,6 @@ const Reviews = () => {
   const { category } = useParams();
   const [params, setParams] = useState({});
   const [searchParams, setSearchParams] = useSearchParams({});
-  const sort_by = searchParams.get("sort_by");
-  const order = searchParams.get("order");
 
   const queryOutput = {
     created_at: "date",
@@ -37,10 +35,14 @@ const Reviews = () => {
         setBadCategory(true);
         setIsLoading(false);
       });
-  }, [params]);
+  }, [params, searchParams]);
 
   useEffect(() => {
-    setParams({ category, sort_by: sort_by, order: order });
+    setParams({
+      category,
+      sort_by: searchParams.get("sort_by"),
+      order: searchParams.get("order"),
+    });
   }, [category]);
 
   const handleSortBy = (e) => {
