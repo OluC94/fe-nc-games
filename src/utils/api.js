@@ -5,7 +5,7 @@ export const capitalise = (str) => {
 };
 
 export const dateFormat = (date) => {
-  if (date === "Just added") return date;
+  if (date === "Just added" || date === "Deleted") return date;
 
   const dateArray = date.split("T");
   const timeArray = dateArray[1].split("Z");
@@ -46,6 +46,12 @@ export const addReviewComment = (review_id, data) => {
     .then(({ data }) => {
       return data;
     });
+};
+
+export const deleteCommentByCommentID = (comment_id) => {
+  return gamesAPI.delete(`/comments/${comment_id}`).then(({ data }) => {
+    return data;
+  });
 };
 
 export const fetchCategories = () => {

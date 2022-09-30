@@ -11,7 +11,6 @@ import SingleReview from "./pages/SingleReview";
 
 function App() {
   const [username, setUser] = useState("grumpy19");
-  const [categoryName, setCategoryName] = useState("");
 
   return (
     <div className="App">
@@ -20,10 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/reviews" element={<Reviews />} />
-        <Route
-          path="/categories"
-          element={<Categories setCategoryName={setCategoryName} />}
-        />
+        <Route path="/categories" element={<Categories />} />
         <Route path="/reviews/:category" element={<Reviews />} />
         <Route
           path="/reviews/review/:review_id"
