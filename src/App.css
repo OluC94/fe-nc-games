@@ -65,8 +65,9 @@
   flex-wrap: nowrap;
   align-content: center;
   gap: 12px;
-  margin: auto;
-  width: calc(90% + 12px);
+  margin: 0 auto;
+  padding-inline-start: 0px;
+  width: calc(95% + 12px);
 }
 .comment-list {
   list-style: none;
