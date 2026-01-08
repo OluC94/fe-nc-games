@@ -15,8 +15,8 @@ const CommentCard = ({ review, username, setCommCount }) => {
   const [commentSubmitted, setCommentSubmitted] = useState(false);
   const commentDeletedStr =
     "Your comment has now been deleted, please refresh the page to see updates";
-
   const { review_id } = review;
+
   useEffect(() => {
     setIsLoading(true);
     fetchReviewComments(review_id)
@@ -28,7 +28,7 @@ const CommentCard = ({ review, username, setCommCount }) => {
         setError(err);
         setIsLoading(false);
       });
-  }, []);
+  }, [review_id]);
 
   const handleDelete = (e) => {
     const targetID = parseInt(e.target.value);

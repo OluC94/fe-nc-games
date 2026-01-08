@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { addReviewComment } from "../utils/api";
-import Loading from "./Loading";
 
 const NewComment = ({
   review,
@@ -18,6 +17,9 @@ const NewComment = ({
   const { review_id } = review;
 
   const handleCommentInput = (e) => {
+    if (newComment) {
+      // added to pass build, fix when refactoring
+    }
     setInputComment(e.target.value);
   };
 

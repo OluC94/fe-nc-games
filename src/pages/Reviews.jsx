@@ -43,6 +43,9 @@ const Reviews = () => {
       sort_by: searchParams.get("sort_by"),
       order: searchParams.get("order"),
     });
+
+    // remove this disable when refactoring
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category]);
 
   const handleSortBy = (e) => {

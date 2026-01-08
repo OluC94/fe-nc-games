@@ -9,8 +9,8 @@ import { useContext } from "react";
 import { UserContext } from "../contexts/User";
 
 const SingleReview = () => {
-  const { category, review_id } = useParams();
-  const { username, setUser } = useContext(UserContext);
+  const { review_id } = useParams();
+  const { username } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(true);
   const [displayReview, setDisplayReview] = useState({});
   const [error, setError] = useState(null);

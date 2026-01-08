@@ -6,7 +6,6 @@ import Home from "./pages/Home";
 import Reviews from "./pages/Reviews";
 import { useState } from "react";
 import Categories from "./pages/Categories";
-import { useParams } from "react-router-dom";
 import SingleReview from "./pages/SingleReview";
 import ErrorPage from "./components/ErrorPage";
 import { UserContext } from "./contexts/User";
