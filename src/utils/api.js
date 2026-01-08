@@ -13,7 +13,7 @@ export const dateFormat = (date) => {
 };
 
 const gamesAPI = axios.create({
-  baseURL: "https://oluc94-nc-games.cyclic.app/api",
+  baseURL: "https://be-project-nc-games.onrender.com/api",
 });
 
 export const fetchReviews = (params) => {
